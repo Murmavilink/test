@@ -3,7 +3,7 @@
 
 
 const getData = () => {
-    return fetch('db.json').then(res => res.json())
+    fetch('db.json').then(res => res.json())
     .then(data => {
         sendData('https://jsonplaceholder.typicode.com/posts', JSON.stringify(data))
         .then(data => {
