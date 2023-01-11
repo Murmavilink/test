@@ -1,30 +1,68 @@
 'use strict';
 
-const form = document.getElementById('form');
-const name = document.getElementById('text');
-const pass = document.getElementById('number');
+
+
+const getData = () => {
+    return fetch('db.json').then(res => res.json())
+    .then(data => {
+        sendData('https://jsonplaceholder.typicode.com/posts', JSON.stringify(data))
+        .then(data => {
+            console.log(data);
+        });
+    });
+};
 
 const sendData = (url, data) => {
     return fetch(url, {
         method: 'POST',
         body: data,
         headers: {
-            'Content-type': 'multipart/form-data',
+            'Content-type': 'application/json; charset=UTF-8',
         },
     }).then(res => res.json());
 };
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
 
-    const data = new FormData(form);
+getData();
 
-sendData('https://jsonplaceholder.typicode.com/posts', data)
-    .then(data => {
-        console.log(data);
-    });
 
-});
+
+
+
+
+
+
+
+
+
+
+
+
+// const form = document.getElementById('form');
+// const name = document.getElementById('text');
+// const pass = document.getElementById('number');
+
+// const sendData = (url, data) => {
+//     return fetch(url, {
+//         method: 'POST',
+//         body: data,
+//         headers: {
+//             'Content-type': 'multipart/form-data',
+//         },
+//     }).then(res => res.json());
+// };
+
+// form.addEventListener('submit', (e) => {
+//     e.preventDefault();
+
+//     const data = new FormData(form);
+
+// sendData('https://jsonplaceholder.typicode.com/posts', data)
+//     .then(data => {
+//         console.log(data);
+//     });
+
+// });
 
 
 
