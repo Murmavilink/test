@@ -1,5 +1,16 @@
-{
-    "user": "Vlad",
-    "age": 33,
-    "role": "developer"
-}
+[
+    {
+        "id": 0,
+        "user": "Vlad",
+        "age": 33,
+        "role": "developer"
+    },
+
+    {
+        "id": 1,
+        "user": "Alex",
+        "age": 26,
+        "role": "front-developer"
+    }
+]
+

@@ -1,29 +1,130 @@
 'use strict';
 
+const list = document.getElementById('list');
+const selectCars = document.getElementById('cars');
+
+let carsObj = {};
 
 
-const getData = () => {
-    fetch('db.json').then(res => res.json())
-    .then(data => {
-        sendData('https://jsonplaceholder.typicode.com/posts', JSON.stringify(data))
-        .then(data => {
-            console.log(data);
-        });
-    });
+const showCar = (car) => {
+    const elementOne = document.createElement('li');
+    const elementTwo = document.createElement('li');
+
+    elementOne.textContent = `Тачка ${car.brand} ${car.model}`;
+    elementTwo.textContent = `Цена: ${car.price}`;
+    list.append(elementOne);
+    list.append(elementTwo);
 };
 
-const sendData = (url, data) => {
-    return fetch(url, {
-        method: 'POST',
-        body: data,
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-    }).then(res => res.json());
+selectCars.addEventListener('change', () => {
+    const option = selectCars.options[selectCars.selectedIndex];
+    list.innerHTML = '';
+
+    if(option.value === 'bmw') {
+        // let id = selectCars.selectedIndex - 1;
+        showCar(carsObj[selectCars.selectedIndex - 1]);
+    } else if(option.value === 'volvo') {
+        showCar(carsObj[selectCars.selectedIndex - 1]);
+    }
+
+});
+
+
+const getCars = (url) => {
+    return fetch(url).then(res => res.json());
 };
 
 
-getData();
+getCars('cars.json').then(data => {
+    carsObj = data.cars;
+}).catch(error => {
+    console.dir(error.message);
+});
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const getData = async (id) => {
+
+//     try {
+//         const responseUsers = await fetch('./db.json');
+//         const users = await responseUsers.json();
+//         const responseUser = await fetch(`${users[id].id}.json`);
+//         return await responseUser.json();
+//     } catch(error) {
+//         throw new Error('Какая то ошибка!');
+//     }
+
+   
+// };
+
+// getData(10).then(data => {
+//     console.log(data);
+// }).catch(error => {
+//     console.log(error.message);
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const getData = () => {
+//     return fetch('db.json').then(res => res.json());
+// };
+
+
+// getData().then(users => {
+//     const userId = users[1].id;
+
+//     fetch(`${userId}.json`)
+//     .then(res => res.json())
+//     .then(user => console.log(user))
+// });
 
 
 
